@@ -1,16 +1,17 @@
-"use client"
+"use client";
 
-import { useTheme } from "next-themes"
-import UserDashboard from "@/components/UserDashboard";
 import { AppSidebar } from "@/components/app-sidebar";
+import RolesTable from "@/components/RolesTable";
 import ToggleThemeButton from "@/components/ToggleThemeButton";
-import { SidebarProvider, SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
+import {
+  SidebarProvider,
+  SidebarInset,
+  SidebarTrigger,
+} from "@/components/ui/sidebar";
+export default function UserDashboard() {
 
-export default function Home() {
-  const { setTheme } = useTheme()
   return (
-   <>
-   <SidebarProvider
+    <SidebarProvider
       style={
         {
           "--sidebar-width": "19rem",
@@ -21,11 +22,10 @@ export default function Home() {
       <SidebarInset>
         <header className="flex h-16 shrink-0 items-center gap-2 px-4">
           <SidebarTrigger className="-ml-1" />
-          <ToggleThemeButton/>
+          <ToggleThemeButton />
         </header>
-        <UserDashboard/>
+        <RolesTable/>
       </SidebarInset>
     </SidebarProvider>
-   </>
   );
 }
