@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Interface Admin Dashboard
 
-## Getting Started
+Welcome to the **Interface Admin Dashboard** project! This is a robust and responsive admin panel designed for managing user roles and permissions. It provides core functionalities like adding, editing, and deleting users, assigning roles, and more. This dashboard is built with React and utilizes modern UI components to ensure an intuitive and efficient user experience.
 
-First, run the development server:
+### Project Domain
+- **Live Demo**: [Interface Admin Dashboard](https://interface-admin-dashboard.vercel.app/)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Table of Contents
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Installation](#installation)
+- [Project Structure](#project-structure)
+- [Components](#components)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **User Management**: Add, edit, and delete users directly from the dashboard.
+- **Role Management**: Assign different roles to users such as "Admin," "Employee," "User," "Editor," and "Viewer."
+- **Responsive Design**: Works seamlessly on both desktop and mobile devices.
+- **Role-based Actions**: Each user has access to certain actions based on their role.
+- **User Selection**: Allows multiple users to be selected at once.
+- **Clipboard Copy**: Easily copy user IDs to the clipboard with a single click.
 
-## Learn More
+## Technologies Used
 
-To learn more about Next.js, take a look at the following resources:
+- **React** - For building the user interface.
+- **Lucide React** - For icons.
+- **Tailwind CSS** - For responsive design and styling.
+- **Vercel** - For deployment.
+- **TypeScript** - For type checking and improved developer experience.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Installation
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. **Clone the repository:**
 
-## Deploy on Vercel
+   ```bash
+   git clone https://github.com/your-username/interface-admin-dashboard.git
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+2. **Change the directory**
+    ```bash
+    cd directory-name
+3. **Install dependencies**
+    ```bash
+    npm install 
+4. **Run the project**
+    ```bash
+    npm run dev
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+    
