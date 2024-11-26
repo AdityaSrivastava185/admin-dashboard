@@ -7,6 +7,7 @@ import {
   SidebarInset,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
+import { BarChartDemo } from "@/utilities/BarChart";
 import React from "react";
 
 const page = () => {
@@ -26,6 +27,8 @@ const page = () => {
         </header>
         <AspectRatio ratio={16 / 9}>
         <ManageUserTable/>
+        <br/>
+        <BarChartDemo/>
         </AspectRatio>
       </SidebarInset>
     </SidebarProvider>

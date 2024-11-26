@@ -54,13 +54,13 @@ const data = {
       url: "/",
       items: [
         {
-          title: "Roles and Permissions",
+          title: "Permissions",
           url: "/roles-permissions",
           isActive: false,
         },
         {
-          title: "Permissions List",
-          url: "/permissions-list",
+          title: "Roles",
+          url: "/roles-list",
           isActive: false,
         },
       ],

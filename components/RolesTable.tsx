@@ -166,8 +166,8 @@ export const columns: ColumnDef<Users>[] = [
               Copy User ID
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>View User</DropdownMenuItem>
-            <DropdownMenuItem>View User Details</DropdownMenuItem>
+            <DropdownMenuItem>Add Permissions</DropdownMenuItem>
+            <DropdownMenuItem>Revoke Permssions</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       )
