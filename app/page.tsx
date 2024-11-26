@@ -9,6 +9,8 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { DataTableDemo } from "@/components/DataTable";
+import { Charts } from "@/components/Charts";
+import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 
 export default function Home() {
   const { setTheme } = useTheme();
@@ -27,8 +29,10 @@ export default function Home() {
             <SidebarTrigger className="-ml-1" />
             <ToggleThemeButton />
           </header>
-
+          <AspectRatio ratio={16 / 9}>
+          <Charts/>
           <DataTableDemo />
+          </AspectRatio>
         </SidebarInset>
       </SidebarProvider>
     </>
