@@ -1,6 +1,8 @@
 import { AppSidebar } from '@/components/app-sidebar'
+import { DataTableDemo } from '@/components/DataTable'
 import ToggleThemeButton from '@/components/ToggleThemeButton'
 import { SidebarInset, SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar'
+import { AspectRatio } from '@radix-ui/react-aspect-ratio'
 import React from 'react'
 
 function page() {
@@ -20,6 +22,9 @@ function page() {
           <SidebarTrigger className="-ml-1" />
           <ToggleThemeButton/>
         </header>
+        <AspectRatio>
+          <DataTableDemo/>
+        </AspectRatio>
       </SidebarInset>
     </SidebarProvider>
    </>

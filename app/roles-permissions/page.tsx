@@ -2,7 +2,7 @@
 
 import { AppSidebar } from "@/components/app-sidebar";
 import { Charts } from "@/components/Charts";
-import RolesTable from "@/components/RolesTable";
+import { RolesTable } from "@/components/RolesTable";
 import ToggleThemeButton from "@/components/ToggleThemeButton";
 import {
   SidebarProvider,
@@ -10,7 +10,6 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { AspectRatio } from "@radix-ui/react-aspect-ratio";
-import Image from "next/image";
 
 export default function UserDashboard() {
   return (
@@ -28,7 +27,7 @@ export default function UserDashboard() {
           <ToggleThemeButton />
         </header>
         <AspectRatio ratio={16 / 9}>
-          <RolesTable />
+        <RolesTable/>
           <Charts/>
         </AspectRatio>
       </SidebarInset>

@@ -1,4 +1,5 @@
 import { AppSidebar } from "@/components/app-sidebar";
+import { ManageUserTable } from "@/components/manage-users/ManageUser";
 import ToggleThemeButton from "@/components/ToggleThemeButton";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import {
@@ -6,7 +7,6 @@ import {
   SidebarInset,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
-import UserDashboard from "@/components/UserDashboard";
 import React from "react";
 
 const page = () => {
@@ -25,6 +25,7 @@ const page = () => {
           <ToggleThemeButton />
         </header>
         <AspectRatio ratio={16 / 9}>
+        <ManageUserTable/>
         </AspectRatio>
       </SidebarInset>
     </SidebarProvider>

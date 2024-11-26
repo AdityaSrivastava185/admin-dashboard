@@ -1,183 +1,299 @@
-import React, { useState } from "react";
-import { Edit, Trash2, Plus, Shield } from "lucide-react";
-import RoleModal from "./RoleModal";
-import DeleteConfirmModal from "./DeleteConfirmModal";
-import { Badge } from "./ui/badge";
+"use client"
 
-interface Permission {
-  id: string;
-  name: string;
-  description: string;
-}
+import * as React from "react"
+import {
+  ColumnDef,
+  ColumnFiltersState,
+  SortingState,
+  VisibilityState,
+  flexRender,
+  getCoreRowModel,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  useReactTable,
+} from "@tanstack/react-table"
+import { ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react"
 
-interface Role {
-  id: string;
-  name: string;
-  description: string;
-  permissions: Permission[];
-  users: number;
-}
+import { Button } from "@/components/ui/button"
+import { Checkbox } from "@/components/ui/checkbox"
+import {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { Input } from "@/components/ui/input"
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
+import { Badge } from "@/components/ui/badge" // Assuming Badge component is available
 
-const initialRoles: Role[] = [
+// Updated data with permissions as an array
+const data: Users[] = [
   {
-    id: "1",
-    name: "Admin",
-    description: "Full system access",
-    permissions: [
-      { id: "1", name: "create", description: "Create resources" },
-      { id: "2", name: "read", description: "Read resources" },
-      { id: "3", name: "update", description: "Update resources" },
-      { id: "4", name: "delete", description: "Delete resources" },
-    ],
-    users: 3,
+    id: "m5gr84i9",
+    name: "Admin01",
+    status: "active",
+    email: "ken99@yahoo.com",
+    permissions: ["Create", "Read", "Update"], // Permissions array
   },
   {
-    id: "2",
-    name: "Manager",
-    description: "Department management access",
-    permissions: [
-      { id: "1", name: "create", description: "Create resources" },
-      { id: "2", name: "read", description: "Read resources" },
-      { id: "3", name: "update", description: "Update resources" },
-    ],
-    users: 8,
+    id: "3u1reuv4",
+    name: "Admin02",
+    status: "active",
+    email: "Abe45@gmail.com",
+    permissions: ["Read", "Delete"],
   },
   {
-    id: "3",
+    id: "derv1ws0",
+    name: "Super Admin",
+    status: "inactive",
+    email: "Monserrat44@gmail.com",
+    permissions: ["Create", "Read", "Update", "Delete"],
+  },
+  {
+    id: "5kma53ae",
+    name: "User02",
+    status: "inactive",
+    email: "Silas22@gmail.com",
+    permissions: ["Read"],
+  },
+  {
+    id: "bhqecj4p",
     name: "User",
-    description: "Basic user access",
-    permissions: [{ id: "2", name: "read", description: "Read resources" }],
-    users: 24,
+    status: "active",
+    email: "carmella@hotmail.com",
+    permissions: ["Create", "Read"],
   },
-];
+]
 
-export default function RolesTable() {
-  const [roles, setRoles] = useState<Role[]>(initialRoles);
-  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [selectedRole, setSelectedRole] = useState<Role | null>(null);
+export type Users = {
+  id: string
+  name: string
+  status: "active" | "inactive"
+  email: string
+  permissions: ("Create" | "Read" | "Update" | "Delete" | "Custom")[] // Updated to array of strings
+}
 
-  const handleAddRole = (newRole: Partial<Role>) => {
-    const role: Role = {
-      id: Date.now().toString(),
-      name: newRole.name!,
-      description: newRole.description!,
-      permissions: newRole.permissions!,
-      users: 0,
-    };
-    setRoles([...roles, role]);
-  };
-
-  const handleEditRole = (updatedRole: Partial<Role>) => {
-    setRoles(
-      roles.map((role) =>
-        role.id === selectedRole?.id ? { ...role, ...updatedRole } : role
+export const columns: ColumnDef<Users>[] = [
+  {
+    id: "select",
+    header: ({ table }) => (
+      <Checkbox
+        checked={
+          table.getIsAllPageRowsSelected() ||
+          (table.getIsSomePageRowsSelected() && "indeterminate")
+        }
+        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+        aria-label="Select all"
+      />
+    ),
+    cell: ({ row }) => (
+      <Checkbox
+        checked={row.getIsSelected()}
+        onCheckedChange={(value) => row.toggleSelected(!!value)}
+        aria-label="Select row"
+      />
+    ),
+    enableSorting: false,
+    enableHiding: false,
+  },
+  {
+    accessorKey: "id",
+    header: "Id",
+  },
+  {
+    accessorKey: "name",
+    header: "Name",
+  },
+  {
+    accessorKey: "email",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Email
+          <ArrowUpDown />
+        </Button>
       )
-    );
-  };
+    },
+    cell: ({ row }) => <div className="lowercase">{row.getValue("email")}</div>,
+  },
+  {
+    accessorKey: "permissions",
+    header: "Permissions",
+    cell: ({ row }) => {
+      const permissions = row.getValue("permissions") as string[];
+      return (
+        <div className="flex flex-wrap gap-2">
+          {permissions.map((permission) => (
+            <Badge key={permission} className=" p-2 font-thin">{permission}</Badge>
+          ))}
+        </div>
+      );
+    },
+  },
+  {
+    id: "actions",
+    enableHiding: false,
+    cell: ({ row }) => {
+      const user = row.original
 
-  const handleDeleteRole = () => {
-    if (selectedRole) {
-      setRoles(roles.filter((role) => role.id !== selectedRole.id));
-      setSelectedRole(null);
-    }
-  };
+      return (
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" className="h-8 w-8 p-0">
+              <span className="sr-only">Open menu</span>
+              <MoreHorizontal />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuLabel>Actions</DropdownMenuLabel>
+            <DropdownMenuItem
+              onClick={() => navigator.clipboard.writeText(user.id)}
+            >
+              Copy User ID
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>View User</DropdownMenuItem>
+            <DropdownMenuItem>View User Details</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      )
+    },
+  },
+]
+
+export function RolesTable() {
+  const [sorting, setSorting] = React.useState<SortingState>([])
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
+  const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
+  const [rowSelection, setRowSelection] = React.useState({})
+
+  const table = useReactTable({
+    data,
+    columns,
+    onSortingChange: setSorting,
+    onColumnFiltersChange: setColumnFilters,
+    getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    onColumnVisibilityChange: setColumnVisibility,
+    onRowSelectionChange: setRowSelection,
+    state: {
+      sorting,
+      columnFilters,
+      columnVisibility,
+      rowSelection,
+    },
+  })
 
   return (
-    <div className="dark:bg-[#0A0A0A] shadow-md p-4 sm:p-8">
-      <div className="flex flex-col sm:flex-row justify-between items-center mb-4 sm:mb-8 text-center sm:text-left">
-        <h2 className="text-xl sm:text-3xl font-semibold text-gray-800 dark:text-white mb-4 sm:mb-0">
-          Roles & Permissions
-        </h2>
-        <button
-          onClick={() => setIsAddModalOpen(true)}
-          className="flex items-center px-4 sm:px-5 py-2 sm:py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
-        >
-          <Plus className="w-5 h-5 mr-2" />
-          Add Role
-        </button>
-      </div>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-gray-800 dark:text-white">
-        {roles.map((role) => (
-          <div
-            key={role.id}
-            className="bg-white dark:bg-[#18181B] p-6 rounded-xl shadow-lg transition-transform transform hover:scale-105 dark:shadow-lg border-2 border-[#F5F5F5]"
-          >
-            <div className="flex flex-col items-center sm:items-start mb-3">
-              <Shield className="w-6 h-6 text-indigo-600 mb-2" />
-              <div className="text-lg font-semibold">{role.name}</div>
-            </div>
-            <div className="mb-4 text-sm text-gray-400 text-center sm:text-left">
-              {role.description}
-            </div>
-            <div className="flex flex-wrap justify-center sm:justify-start gap-2 mb-4">
-              {role.permissions.map((permission) => (
-                <Badge
-                  key={permission.id}
-                  className="px-3 py-1 text-sm"
-                >
-                  {permission.name}
-                </Badge>
-              ))}
-            </div>
-            <div className="text-sm mb-4 text-center sm:text-left">
-              {role.users} users
-            </div>
-            <div className="flex space-x-4 justify-center sm:justify-start">
-              <button
-                onClick={() => {
-                  setSelectedRole(role);
-                  setIsEditModalOpen(true);
-                }}
-                className="text-indigo-600 hover:text-indigo-900"
-              >
-                <Edit className="w-5 h-5" />
-              </button>
-              <button
-                onClick={() => {
-                  setSelectedRole(role);
-                  setIsDeleteModalOpen(true);
-                }}
-                className="text-red-600 hover:text-red-900"
-              >
-                <Trash2 className="w-5 h-5" />
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      <RoleModal
-        isOpen={isAddModalOpen}
-        onClose={() => setIsAddModalOpen(false)}
-        onSubmit={handleAddRole}
-        title="Add New Role"
-      />
-
-      {selectedRole && (
-        <RoleModal
-          isOpen={isEditModalOpen}
-          onClose={() => {
-            setIsEditModalOpen(false);
-            setSelectedRole(null);
-          }}
-          onSubmit={handleEditRole}
-          role={selectedRole}
-          title="Edit Role"
+    <div className="w-full">
+      <div className="flex items-center py-4">
+        <Input
+          placeholder="Filter emails..."
+          value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
+          onChange={(event) =>
+            table.getColumn("email")?.setFilterValue(event.target.value)
+          }
+          className="max-w-sm"
         />
-      )}
-
-      <DeleteConfirmModal
-        isOpen={isDeleteModalOpen}
-        onClose={() => {
-          setIsDeleteModalOpen(false);
-          setSelectedRole(null);
-        }}
-        onConfirm={handleDeleteRole}
-        itemName="Role"
-      />
-    </div> 
-  );
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="outline" className="ml-auto">
+              Columns <ChevronDown />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            {table
+              .getAllColumns()
+              .filter((column) => column.getCanHide())
+              .map((column) => {
+                return (
+                  <DropdownMenuCheckboxItem
+                    key={column.id}
+                    className="capitalize"
+                    checked={column.getIsVisible()}
+                    onCheckedChange={(value) =>
+                      column.toggleVisibility(!!value)
+                    }
+                  >
+                    {column.id}
+                  </DropdownMenuCheckboxItem>
+                )
+              })}
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
+      <div className="rounded-md border">
+        <Table>
+          <TableHeader>
+            {table.getHeaderGroups().map((headerGroup) => (
+              <TableRow key={headerGroup.id}>
+                {headerGroup.headers.map((header) => {
+                  return (
+                    <TableHead key={header.id}>
+                      {header.isPlaceholder
+                        ? null
+                        : flexRender(
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
+                    </TableHead>
+                  )
+                })}
+              </TableRow>
+            ))}
+          </TableHeader>
+          <TableBody>
+            {table.getRowModel().rows?.length ? (
+              table.getRowModel().rows.map((row) => (
+                <TableRow
+                  key={row.id}
+                  data-state={row.getIsSelected() && "selected"}
+                >
+                  {row.getVisibleCells().map((cell) => (
+                    <TableCell key={cell.id}>
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext()
+                      )}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell
+                  colSpan={columns.length}
+                  className="h-24 text-center"
+                >
+                  No results.
+                </TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </div>
+      <div className="flex items-center justify-end space-x-2 py-4">
+        <div className="flex-1 text-sm text-muted-foreground">
+          {table.getFilteredSelectedRowModel().rows.length} of{" "}
+          {table.getFilteredRowModel().rows.length} row(s) selected.
+        </div>
+      </div>
+    </div>
+  )
 }
