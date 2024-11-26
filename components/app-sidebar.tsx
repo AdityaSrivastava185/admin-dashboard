@@ -34,7 +34,7 @@ const data = {
       items: [
         {
           title: "Manage Users",
-          url: "#",
+          url: "/manage-users",
           isActive: false,
         },
         {
