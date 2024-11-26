@@ -1,4 +1,5 @@
 import { AppSidebar } from '@/components/app-sidebar'
+import { TableDemo } from '@/components/Table'
 import ToggleThemeButton from '@/components/ToggleThemeButton'
 import { SidebarProvider, SidebarInset, SidebarTrigger } from '@/components/ui/sidebar'
 import { UserRolesTable } from '@/components/UserRolesTable'
@@ -21,6 +22,9 @@ const page = () => {
             <ToggleThemeButton />
           </header>
           <UserRolesTable/>
+          <br />
+          <h3>List of Recent Users</h3>
+          <TableDemo/>
         </SidebarInset>
       </SidebarProvider> 
     </div>

@@ -2,6 +2,7 @@
 
 import { AppSidebar } from "@/components/app-sidebar";
 import { RolesTable } from "@/components/RolesTable";
+import { TableDemo } from "@/components/Table";
 import ToggleThemeButton from "@/components/ToggleThemeButton";
 import {
   SidebarProvider,
@@ -25,6 +26,9 @@ export default function UserDashboard() {
           <ToggleThemeButton />
         </header>
         <RolesTable/>
+        <br />
+        <h3>List of Recent Users</h3>
+        <TableDemo/>
       </SidebarInset>
     </SidebarProvider>
   );
