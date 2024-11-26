@@ -1,5 +1,5 @@
-import * as React from "react"
-import { GalleryVerticalEnd } from "lucide-react"
+import * as React from "react";
+import { GalleryVerticalEnd } from "lucide-react";
 
 import {
   Sidebar,
@@ -12,7 +12,23 @@ import {
   SidebarMenuSub,
   SidebarMenuSubButton,
   SidebarMenuSubItem,
-} from "@/components/ui/sidebar"
+} from "@/components/ui/sidebar";
+import { Button } from "./ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuSub,
+  DropdownMenuSubTrigger,
+  DropdownMenuPortal,
+  DropdownMenuSubContent,
+} from "@radix-ui/react-dropdown-menu";
+import { DropdownMenuShortcut } from "./ui/dropdown-menu";
+import { Avatar, AvatarImage, AvatarFallback } from "@radix-ui/react-avatar";
 
 // This is sample data.
 const data = {
@@ -66,7 +82,7 @@ const data = {
       ],
     },
   ],
-}
+};
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
@@ -80,11 +96,15 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                   <GalleryVerticalEnd className="size-4" />
                 </div>
                 <div className="flex flex-col gap-0.5 leading-none">
-                  <span className="font-semibold">Admin Dashboard</span>
+                  <span className="font-semibold">VRV Security Dashboard</span>
                   <span className="">v1.0.0</span>
                 </div>
               </a>
             </SidebarMenuButton>
+            <Avatar>
+                  <AvatarImage src="https://img.freepik.com/free-psd/3d-illustration-human-avatar-profile_23-2150671142.jpg" className="rounded-full h-11 w-11" />
+                  <AvatarFallback>VRV</AvatarFallback>
+                </Avatar>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
@@ -114,6 +134,91 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           </SidebarMenu>
         </SidebarGroup>
       </SidebarContent>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="outline">My Account</Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent className="w-56 p-2 rounded-lg shadow-lg bg-white dark:bg-[#0A0A0A] border border-gray-200 dark:border-gray-700">
+          <DropdownMenuLabel className="text-gray-600 dark:text-gray-300 font-semibold">
+            My Account
+          </DropdownMenuLabel>
+          <DropdownMenuSeparator className="my-1 border-gray-200 dark:border-gray-700" />
+          <DropdownMenuGroup>
+            <DropdownMenuItem className="flex items-center justify-between px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">
+              Profile
+            </DropdownMenuItem>
+            <DropdownMenuItem className="flex items-center justify-between px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">
+              Billing
+              <DropdownMenuShortcut className="ml-auto text-gray-400 dark:text-gray-500">
+                ⌘B
+              </DropdownMenuShortcut>
+            </DropdownMenuItem>
+            <DropdownMenuItem className="flex items-center justify-between px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">
+              Settings
+              <DropdownMenuShortcut className="ml-auto text-gray-400 dark:text-gray-500">
+                ⌘S
+              </DropdownMenuShortcut>
+            </DropdownMenuItem>
+            <DropdownMenuItem className="flex items-center justify-between px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">
+              Keyboard shortcuts
+              <DropdownMenuShortcut className="ml-auto text-gray-400 dark:text-gray-500">
+                ⌘K
+              </DropdownMenuShortcut>
+            </DropdownMenuItem>
+          </DropdownMenuGroup>
+          <DropdownMenuSeparator className="my-1 border-gray-200 dark:border-gray-700" />
+          <DropdownMenuGroup>
+            <DropdownMenuItem className="flex items-center justify-between px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">
+              Team
+            </DropdownMenuItem>
+            <DropdownMenuSub>
+              <DropdownMenuSubTrigger className="flex items-center justify-between px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">
+                Invite users
+              </DropdownMenuSubTrigger>
+              <DropdownMenuPortal>
+                <DropdownMenuSubContent className="w-48 p-2 rounded-lg shadow-lg bg-white dark:bg-[#0A0A0A] border border-gray-200 dark:border-gray-700">
+                  <DropdownMenuItem className="flex items-center justify-between px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">
+                    Email
+                  </DropdownMenuItem>
+                  <DropdownMenuItem className="flex items-center justify-between px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">
+                    Message
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator className="my-1 border-gray-200 dark:border-gray-700" />
+                  <DropdownMenuItem className="flex items-center justify-between px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">
+                    More...
+                  </DropdownMenuItem>
+                </DropdownMenuSubContent>
+              </DropdownMenuPortal>
+            </DropdownMenuSub>
+            <DropdownMenuItem className="flex items-center justify-between px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">
+              New Team
+              <DropdownMenuShortcut className="ml-auto text-gray-400 dark:text-gray-500">
+                ⌘+T
+              </DropdownMenuShortcut>
+            </DropdownMenuItem>
+          </DropdownMenuGroup>
+          <DropdownMenuSeparator className="my-1 border-gray-200 dark:border-gray-700" />
+          <DropdownMenuItem className="flex items-center justify-between px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">
+            GitHub
+          </DropdownMenuItem>
+          <DropdownMenuItem className="flex items-center justify-between px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">
+            Support
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            disabled
+            className="flex items-center justify-between px-3 py-2 text-gray-300 dark:text-gray-500 rounded-md"
+          >
+            API
+          </DropdownMenuItem>
+          <DropdownMenuSeparator className="my-1 border-gray-200 dark:border-gray-700" />
+          <DropdownMenuItem className="flex items-center justify-between px-3 py-2 hover:bg-red-100 dark:hover:bg-red-600 rounded-md text-red-600 dark:text-red-400">
+            Log out
+            <DropdownMenuShortcut className="ml-auto text-gray-400 dark:text-gray-500">
+              ⇧⌘Q
+            </DropdownMenuShortcut>
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
     </Sidebar>
-  )
+  );
 }

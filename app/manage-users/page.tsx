@@ -1,7 +1,6 @@
 import { AppSidebar } from "@/components/app-sidebar";
 import { ManageUserTable } from "@/components/manage-users/ManageUser";
 import ToggleThemeButton from "@/components/ToggleThemeButton";
-import { AspectRatio } from "@/components/ui/aspect-ratio";
 import {
   SidebarProvider,
   SidebarInset,
@@ -25,11 +24,9 @@ const page = () => {
           <SidebarTrigger className="-ml-1" />
           <ToggleThemeButton />
         </header>
-        <AspectRatio ratio={16 / 9}>
         <ManageUserTable/>
         <br/>
         <BarChartDemo/>
-        </AspectRatio>
       </SidebarInset>
     </SidebarProvider>
   );

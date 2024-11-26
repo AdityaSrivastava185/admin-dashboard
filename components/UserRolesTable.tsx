@@ -109,7 +109,7 @@ export function UserRolesTable() {
                       </DropdownMenuItem>
                       <DropdownMenuSeparator />
                       <DropdownMenuItem onClick={() => handleEditUser(user)}>
-                        Add user Roles
+                        Edit User Roles
                       </DropdownMenuItem>
                       <DropdownMenuItem
                         onClick={() => handleDeleteUser(user.id)}

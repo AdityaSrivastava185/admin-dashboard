@@ -9,9 +9,8 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { TooltipChartDemo } from "@/utilities/ToolTipChart";
-import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 import { ActivePieChartDemo } from "@/utilities/ActivePieChart";
-import { InactivePieChartDemo } from "@/utilities/InactivePieChart";
+
 
 function Page() {
   return (
@@ -33,9 +32,7 @@ function Page() {
           <TooltipChartDemo />
           <ActivePieChartDemo />
           <ActivePieChartDemo />
-          {/* <InactivePieChartDemo /> */}
         </div>
-       
       </SidebarInset>
     </SidebarProvider>
   );

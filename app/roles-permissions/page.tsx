@@ -8,7 +8,6 @@ import {
   SidebarInset,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
-import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 
 export default function UserDashboard() {
   return (
@@ -25,9 +24,7 @@ export default function UserDashboard() {
           <SidebarTrigger className="-ml-1" />
           <ToggleThemeButton />
         </header>
-        <AspectRatio ratio={16 / 9}>
         <RolesTable/>
-        </AspectRatio>
       </SidebarInset>
     </SidebarProvider>
   );

@@ -1,5 +1,4 @@
 import { AppSidebar } from '@/components/app-sidebar'
-import PermissionsTable from '@/components/PermissionsTable'
 import ToggleThemeButton from '@/components/ToggleThemeButton'
 import { SidebarProvider, SidebarInset, SidebarTrigger } from '@/components/ui/sidebar'
 import { UserRolesTable } from '@/components/UserRolesTable'

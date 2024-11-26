@@ -21,9 +21,9 @@ const page = () => {
           <SidebarTrigger className="-ml-1" />
           <ToggleThemeButton />
         </header>
-        <UserStatusTable/>
-        <br/>
         <Charts/>
+        <br/>
+        <UserStatusTable/>
       </SidebarInset>
     </SidebarProvider>
   </>
