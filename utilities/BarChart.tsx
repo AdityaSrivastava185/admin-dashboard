@@ -39,7 +39,7 @@ const chartConfig = {
 
 export function BarChartDemo() {
   return (
-    <Card>
+    <Card className="w-full max-w-sm mx-auto">
       <CardHeader>
         <CardTitle>Active-Inactive - Multiple</CardTitle>
         <CardDescription>January - June 2024</CardDescription>

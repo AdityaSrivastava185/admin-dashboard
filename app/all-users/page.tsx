@@ -1,15 +1,21 @@
-import { AppSidebar } from '@/components/app-sidebar'
-import { DataTableDemo } from '@/components/DataTable'
-import ToggleThemeButton from '@/components/ToggleThemeButton'
-import { SidebarInset, SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar'
-import { AspectRatio } from '@radix-ui/react-aspect-ratio'
-import React from 'react'
+import React from "react";
+import { AppSidebar } from "@/components/app-sidebar";
+import { DataTableDemo } from "@/components/DataTable";
+import ToggleThemeButton from "@/components/ToggleThemeButton";
+import { Card } from "@/components/ui/card";
+import {
+  SidebarInset,
+  SidebarProvider,
+  SidebarTrigger,
+} from "@/components/ui/sidebar";
+import { TooltipChartDemo } from "@/utilities/ToolTipChart";
+import { AspectRatio } from "@radix-ui/react-aspect-ratio";
+import { ActivePieChartDemo } from "@/utilities/ActivePieChart";
+import { InactivePieChartDemo } from "@/utilities/InactivePieChart";
 
-function page() {
+function Page() {
   return (
-    <div>
-      <>
-   <SidebarProvider
+    <SidebarProvider
       style={
         {
           "--sidebar-width": "19rem",
@@ -18,18 +24,21 @@ function page() {
     >
       <AppSidebar />
       <SidebarInset>
-        <header className="flex h-16 shrink-0 items-center gap-2 px-4">
+        <header className="flex h-16 items-center gap-2 px-4">
           <SidebarTrigger className="-ml-1" />
-          <ToggleThemeButton/>
+          <ToggleThemeButton />
         </header>
-        <AspectRatio>
-          <DataTableDemo/>
-        </AspectRatio>
+        <DataTableDemo />
+        <div className="flex flex-col md:flex-row gap-2 items-center justify-between">
+          <TooltipChartDemo />
+          <ActivePieChartDemo />
+          <ActivePieChartDemo />
+          {/* <InactivePieChartDemo /> */}
+        </div>
+       
       </SidebarInset>
     </SidebarProvider>
-   </>
-    </div>
-  )
+  );
 }
 
-export default page
+export default Page;
