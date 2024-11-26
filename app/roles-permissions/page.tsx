@@ -1,7 +1,6 @@
 "use client";
 
 import { AppSidebar } from "@/components/app-sidebar";
-import { Charts } from "@/components/Charts";
 import { RolesTable } from "@/components/RolesTable";
 import ToggleThemeButton from "@/components/ToggleThemeButton";
 import {
@@ -28,7 +27,6 @@ export default function UserDashboard() {
         </header>
         <AspectRatio ratio={16 / 9}>
         <RolesTable/>
-          <Charts/>
         </AspectRatio>
       </SidebarInset>
     </SidebarProvider>

@@ -2,6 +2,7 @@ import { AppSidebar } from '@/components/app-sidebar'
 import PermissionsTable from '@/components/PermissionsTable'
 import ToggleThemeButton from '@/components/ToggleThemeButton'
 import { SidebarProvider, SidebarInset, SidebarTrigger } from '@/components/ui/sidebar'
+import { UserRolesTable } from '@/components/UserRolesTable'
 import React from 'react'
 
 const page = () => {
@@ -20,7 +21,7 @@ const page = () => {
             <SidebarTrigger className="-ml-1" />
             <ToggleThemeButton />
           </header>
-          <PermissionsTable/>
+          <UserRolesTable/>
         </SidebarInset>
       </SidebarProvider> 
     </div>

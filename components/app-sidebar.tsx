@@ -39,12 +39,12 @@ const data = {
         },
         {
           title: "User Roles",
-          url: "#",
+          url: "/user-roles",
           isActive: false,
         },
         {
           title: "User Status",
-          url: "#",
+          url: "/user-status",
           isActive: false,
         },
       ],
